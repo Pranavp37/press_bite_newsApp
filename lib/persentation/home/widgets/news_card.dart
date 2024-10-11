@@ -53,7 +53,7 @@ class NewsCard extends StatelessWidget {
                     style: TextStyle(
                       color: context.isDarkMode
                           ? AppColors.textColorWhite
-                          : AppColors.textColorBlack,
+                          : AppColors.textColorDarkSlateGray,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),

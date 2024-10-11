@@ -7,6 +7,7 @@ import 'package:news_app/core/constant/defult%20Image/defult_image.dart';
 import 'package:news_app/core/theme/app_color.dart';
 import 'package:news_app/data/sources/news_api_provider.dart';
 import 'package:news_app/persentation/home/bloc/bloc/getnews_bloc.dart';
+import 'package:news_app/persentation/home/widgets/home_drawer.dart';
 import 'package:news_app/persentation/home/widgets/news_card.dart';
 import 'package:news_app/persentation/readingpage/page/reading_page.dart';
 
@@ -36,58 +37,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Drawer(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    radius: 28,
-                    child: Icon(Icons.person),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'User  Name',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'Useremail.com',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Divider(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [],
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
+        child: HomeScreenDrawer(),
       ),
       appBar: AppBar(
+        iconTheme: const IconThemeData(size: 40),
         backgroundColor: context.isDarkMode
             ? AppColors.darkBackgroundColor
             : Colors.transparent,
-        // leading: const Padding(
-        //     padding: EdgeInsets.all(8.0),
-        //     child: CircleAvatar(
-        //       radius: 20,
-        //       child: Icon(Icons.person),
-        //     )),
         actions: [
           IconButton(
               onPressed: () {
@@ -110,7 +66,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   style: TextStyle(
                     color: context.isDarkMode
                         ? AppColors.textColorWhite
-                        : AppColors.textColorBlack,
+                        : AppColors.textColorDarkSlateGray,
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
                   ),

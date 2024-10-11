@@ -65,7 +65,7 @@ class ReadingPage extends StatelessWidget {
                 style: TextStyle(
                   color: context.isDarkMode
                       ? AppColors.textColorWhite
-                      : AppColors.textColorBlack,
+                      : AppColors.textColorDarkSlateGray,
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
@@ -78,7 +78,7 @@ class ReadingPage extends StatelessWidget {
                 style: TextStyle(
                   color: context.isDarkMode
                       ? AppColors.textColorWhite
-                      : AppColors.textColorBlack,
+                      : AppColors.textColorDarkSlateGray,
                   fontSize: 22,
                 ),
               ),
@@ -90,7 +90,7 @@ class ReadingPage extends StatelessWidget {
                 style: TextStyle(
                   color: context.isDarkMode
                       ? AppColors.textColorWhite
-                      : AppColors.textColorBlack,
+                      : AppColors.textColorDarkSlateGray,
                   fontSize: 16,
                   // fontWeight: FontWeight.bold,
                 ),
@@ -104,7 +104,7 @@ class ReadingPage extends StatelessWidget {
                     decoration: TextDecoration.underline,
                     color: context.isDarkMode
                         ? AppColors.textColorWhite
-                        : AppColors.textColorBlack,
+                        : AppColors.textColorDarkSlateGray,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
@@ -117,7 +117,7 @@ class ReadingPage extends StatelessWidget {
                 style: TextStyle(
                   color: context.isDarkMode
                       ? AppColors.textColorWhite
-                      : AppColors.textColorBlack,
+                      : AppColors.textColorDarkSlateGray,
                   fontSize: 18,
                 ),
               ),
@@ -140,7 +140,7 @@ class ReadingPage extends StatelessWidget {
               style: TextStyle(
                 color: context.isDarkMode
                     ? AppColors.textColorWhite
-                    : AppColors.textColorBlack,
+                    : AppColors.textColorDarkSlateGray,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -151,7 +151,7 @@ class ReadingPage extends StatelessWidget {
               style: TextStyle(
                 color: context.isDarkMode
                     ? AppColors.textColorWhite
-                    : AppColors.textColorBlack,
+                    : AppColors.textColorDarkSlateGray,
                 fontSize: 16,
                 fontWeight: FontWeight.w200,
               ),

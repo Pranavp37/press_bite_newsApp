@@ -26,6 +26,9 @@ class _BottomNavState extends State<BottomNav> {
     return Scaffold(
       body: _screens[_selectedtIndex],
       bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: context.isDarkMode
+              ? AppColors.darkBackgroundColor
+              : AppColors.lightBackgroundColor,
           currentIndex: _selectedtIndex,
           selectedItemColor: context.isDarkMode
               ? AppColors.primaryColor
