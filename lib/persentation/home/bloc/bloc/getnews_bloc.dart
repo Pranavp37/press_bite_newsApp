@@ -11,7 +11,7 @@ part 'getnews_state.dart';
 
 class GetnewsBloc extends Bloc<GetnewsEvent, GetnewsState> {
   GetnewsBloc() : super(GetnewsInitial()) {
-    on<GetnewsfechedEvent>((event, emit) async {
+    on<GetnewsfechedEvent>((event, emit,) async {
       emit(GetnewsLoading());
       try {
         List<ArticleEntity> data = await s1<GetnewsUsecase>().call();

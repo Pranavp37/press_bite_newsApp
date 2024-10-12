@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/common/cubit/themeswitch_cubit.dart';
 import 'package:news_app/core/theme/app_color.dart';
 
 class HomeScreenDrawer extends StatelessWidget {
@@ -100,16 +102,22 @@ class HomeScreenDrawer extends StatelessWidget {
           const Spacer(),
           Row(
             children: [
-              Switch(
-                value: true,
-                onChanged: (value) {},
+              BlocBuilder<ThemeCubit, bool>(
+                builder: (context, state) {
+                  return Switch(
+                    value: state,
+                    onChanged: (value) {
+                      BlocProvider.of<ThemeCubit>(context).thmeSwich();
+                    },
+                  );
+                },
               ),
               const Spacer(),
               // const SizedBox(
               //   width: 40,
               // ),
               const Text(
-                'Dark Theme',
+                'Theme',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               )
             ],

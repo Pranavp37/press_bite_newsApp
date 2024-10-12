@@ -42,7 +42,7 @@ class NewsCard extends StatelessWidget {
               width: 10,
             ),
             SizedBox(
-              width: 240,
+              width: 220,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

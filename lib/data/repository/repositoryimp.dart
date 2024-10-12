@@ -10,4 +10,11 @@ class RepositoryImp extends Repository {
     newsData = await s1<NewsApiProvider>().getNewsDAta();
     return newsData!;
   }
+  
+  @override
+  Future<List<ArticleEntity>> searchNewsfromDAtaSources(String categorey)async {
+     List<ArticleEntity>? newsData = [];
+    newsData = await s1<NewsApiProvider>().searchNewsDAta(categorey);
+    return newsData!;
+  }
 }

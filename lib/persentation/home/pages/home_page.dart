@@ -1,14 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+import 'package:news_app/common/helper/date_formate.dart';
 import 'package:news_app/common/helper/is_dark_mode.dart';
-import 'package:news_app/core/constant/defult%20Image/defult_image.dart';
+import 'package:news_app/core/constant/Images/app_images.dart';
 import 'package:news_app/core/theme/app_color.dart';
 import 'package:news_app/data/sources/news_api_provider.dart';
 import 'package:news_app/persentation/home/bloc/bloc/getnews_bloc.dart';
 import 'package:news_app/persentation/home/widgets/home_drawer.dart';
-import 'package:news_app/persentation/home/widgets/news_card.dart';
+import 'package:news_app/common/widgets/news_card.dart';
 import 'package:news_app/persentation/readingpage/page/reading_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,13 +41,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ),
       appBar: AppBar(
         iconTheme: const IconThemeData(size: 40),
+        title: Image.asset(
+          AppImages.appLogo,
+          height: 130,
+        ),
+        centerTitle: true,
         backgroundColor: context.isDarkMode
             ? AppColors.darkBackgroundColor
             : Colors.transparent,
         actions: [
           IconButton(
               onPressed: () {
-                NewsApiProviderImp().getNewsDAta();
+                NewsApiProviderImp().searchNewsDAta('sports');
               },
               icon: const Icon(
                 Icons.notifications_outlined,
@@ -58,20 +63,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Text(
-                  'Hot News',
-                  style: TextStyle(
-                    color: context.isDarkMode
-                        ? AppColors.textColorWhite
-                        : AppColors.textColorDarkSlateGray,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                  ),
-                ),
-              ],
+            const SizedBox(height: 10),
+            Text(
+              'Hot News',
+              style: TextStyle(
+                color: context.isDarkMode
+                    ? AppColors.textColorWhite
+                    : AppColors.textColorDarkSlateGray,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -143,7 +146,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             null
                                         ? state.newsData[index].urlToImage
                                             .toString()
-                                        : DefultImage.newsdefultImg.toString(),
+                                        : AppImages.newsdefultImg.toString(),
                                   ),
                                 ));
                           },
@@ -152,7 +155,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             title: state.newsData[index].title.toString(),
                             image: state.newsData[index].urlToImage != null
                                 ? state.newsData[index].urlToImage.toString()
-                                : DefultImage.newsdefultImg.toString(),
+                                : AppImages.newsdefultImg.toString(),
                           ),
                         );
                       },
@@ -187,7 +190,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   image: NetworkImage(
                       state.newsData[itemIndex].urlToImage != null
                           ? state.newsData[itemIndex].urlToImage.toString()
-                          : DefultImage.newsdefultImg.toString()),
+                          : AppImages.newsdefultImg.toString()),
                 )),
           ),
         ),
@@ -231,8 +234,5 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  String formatDate(String dateString) {
-    DateTime date = DateTime.parse(dateString);
-    return DateFormat('MMM dd, yyyy').format(date);
-  }
+
 }
