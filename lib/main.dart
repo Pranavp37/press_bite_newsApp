@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/common/cubit/themeswitch_cubit.dart';
 import 'package:news_app/core/theme/app_theme.dart';
+import 'package:news_app/data/sources/news_sqflite_provider.dart';
+import 'package:news_app/persentation/bookmark/bloc/bloc/bookmark_bloc.dart';
 import 'package:news_app/persentation/bottomnav/bottom_nav.dart';
 import 'package:news_app/persentation/home/bloc/bloc/getnews_bloc.dart';
 import 'package:news_app/persentation/search/bloc/bloc/getsearchnews_bloc.dart';
@@ -10,12 +12,12 @@ import 'package:news_app/service_locator.dart';
 Future<void> main() async {
   runApp(const MyApp());
   await setUp();
+  await s1<NewsSqfliteProvider>().initDb();
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -28,7 +30,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => GetsearchnewsBloc(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => BookmarkBloc(),
+        ),
       ],
       child: BlocBuilder<ThemeCubit, bool>(
         builder: (context, state) {

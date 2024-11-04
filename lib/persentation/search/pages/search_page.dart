@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/common/helper/date_formate.dart';
 import 'package:news_app/common/widgets/news_card.dart';
 import 'package:news_app/core/constant/Images/app_images.dart';
 import 'package:news_app/persentation/readingpage/page/reading_page.dart';
@@ -11,18 +10,18 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SearchController _searchController = SearchController();
+    final SearchController searchController = SearchController();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
         child: Column(
           children: [
             SearchBar(
-              controller: _searchController,
+              controller: searchController,
               onChanged: (value) {
                 BlocProvider.of<GetsearchnewsBloc>(context).add(
                   Getsearchnews(
-                    inputText: _searchController.text.toLowerCase(),
+                    inputText: searchController.text.toLowerCase(),
                   ),
                 );
               },
@@ -65,9 +64,8 @@ class SearchPage extends StatelessWidget {
                                             .toString(),
                                         title: state.newsData[index].title
                                             .toString(),
-                                        dateTime: formatDate(state
-                                            .newsData[index].publishedAt
-                                            .toString()),
+                                        dateTime:
+                                            state.newsData[index].publishedAt!,
                                         author: state.newsData[index].author
                                             .toString(),
                                         image: state.newsData[index]

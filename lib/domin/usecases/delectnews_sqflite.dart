@@ -2,9 +2,9 @@ import 'package:news_app/core/constant/usecase/usecase.dart';
 import 'package:news_app/domin/repository/repository.dart';
 import 'package:news_app/service_locator.dart';
 
-class GetsearchNewsUsecase extends Usecase {
+class DelectnewsSqfliteUsecase extends Usecase {
   @override
-  Future call({parms}) {
-    return s1<Repository>().searchNewsfromDataSources(parms);
+  Future call({parms}) async {
+    return await s1<Repository>().delectSqlnewsfromDtaSourses(parms);
   }
 }

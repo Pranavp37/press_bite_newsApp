@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/common/helper/date_formate.dart';
 import 'package:news_app/common/helper/is_dark_mode.dart';
 import 'package:news_app/core/theme/app_color.dart';
+import 'package:news_app/domin/entities/article_entity.dart';
+import 'package:news_app/domin/usecases/addnews_sqflite.dart';
+import 'package:news_app/service_locator.dart';
 
 class ReadingPage extends StatelessWidget {
   const ReadingPage(
@@ -14,7 +18,7 @@ class ReadingPage extends StatelessWidget {
       required this.newsUrl});
   final String image;
   final String author;
-  final String dateTime;
+  final DateTime dateTime;
   final String title;
   final String content;
   final String desc;
@@ -29,7 +33,22 @@ class ReadingPage extends StatelessWidget {
             : Colors.transparent,
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                await s1<AddnewsSqfliteUsecase>().call(
+                  parms: ArticleEntity(
+                    author: author,
+                    content: content,
+                    description: desc,
+                    publishedAt: dateTime,
+                    title: title,
+                    url: newsUrl,
+                    urlToImage: image,
+                  ),
+                );
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Bookmark Added')));
+              },
               icon: const Icon(
                 Icons.bookmark_add_outlined,
                 size: 35,
@@ -134,19 +153,23 @@ class ReadingPage extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              author,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: context.isDarkMode
-                    ? AppColors.textColorWhite
-                    : AppColors.textColorDarkSlateGray,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+            SizedBox(
+              width: 200,
+              child: Text(
+                author,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: context.isDarkMode
+                      ? AppColors.textColorWhite
+                      : AppColors.textColorDarkSlateGray,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Text(
-              dateTime,
+              formatDate(dateTime),
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: context.isDarkMode

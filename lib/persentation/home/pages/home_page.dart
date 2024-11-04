@@ -19,8 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  // ignore: unused_field
-  late final TabController _tabcontroller;
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
@@ -29,8 +27,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       },
     );
     super.initState();
-
-    _tabcontroller = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -137,9 +133,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         .toString(),
                                     title:
                                         state.newsData[index].title.toString(),
-                                    dateTime: formatDate(state
-                                        .newsData[index].publishedAt
-                                        .toString()),
+                                    dateTime:
+                                        state.newsData[index].publishedAt!,
                                     author:
                                         state.newsData[index].author.toString(),
                                     image: state.newsData[index].urlToImage !=
@@ -220,7 +215,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ),
                 ),
                 Text(
-                  formatDate(state.newsData[itemIndex].publishedAt.toString()),
+                  formatDate(state.newsData[itemIndex].publishedAt),
                   style: const TextStyle(
                     fontSize: 15,
                     color: Colors.white60,
@@ -233,6 +228,4 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ],
     );
   }
-
-
 }
