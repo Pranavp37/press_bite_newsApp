@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/common/cubit/themeswitch_cubit.dart';
 import 'package:news_app/core/theme/app_color.dart';
+import 'package:news_app/persentation/account/bloc/bloc/get_user_data_bloc.dart';
 
 class HomeScreenDrawer extends StatelessWidget {
   const HomeScreenDrawer({
@@ -15,32 +16,73 @@ class HomeScreenDrawer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 28,
                 child: Icon(Icons.person),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text(
-                'User  Name',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+              BlocBuilder<GetUserDataBloc, GetUserDataState>(
+                builder: (context, state) {
+                  if (state is GetUserLoading) {
+                    return const CircularProgressIndicator();
+                  }
+                  if (state is GetUserDataLoaded) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          state.model.name!,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          state.model.email!,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+
+                  if (state is GetUserDataError) {
+                    return Text(
+                      state.error!,
+                      style: const TextStyle(
+                          fontSize: 10, fontWeight: FontWeight.bold),
+                    );
+                  }
+
+                  return const Column(
+                    children: [
+                      Text(
+                        'User  Name',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Useremail.com',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
-              Text(
-                'Useremail.com',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Divider(),
-              SizedBox(
+              const Divider(),
+              const SizedBox(
                 height: 20,
               ),
             ],
